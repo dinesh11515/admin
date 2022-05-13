@@ -11,6 +11,10 @@ function App() {
   const [winesMinted, setWinesMinted] = useState(0);
   const [accessoriesMinted, setAccessoriesMinted] = useState(0);
   const [totalMinted, setTotalMinted] = useState(0);
+  const [watchsBought, setWatchsBought] = useState(0);
+  const [bagsBought, setBagsBought] = useState(0);
+  const [winesBought, setWinesBought] = useState(0);
+  const [accessoriesBought, setAccessoriesBought] = useState(0);
   const connect = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(
@@ -181,10 +185,10 @@ function App() {
         .get(`http://localhost:5003/api/tokens/API/userCollection/tokensLeft/`)
         .then((res) => {
           const { tokensLeft } = res.data;
-          setBagsMinted(10000 - tokensLeft.bags);
-          setWinesMinted(tokensLeft.wines);
-          setAccessoriesMinted(tokensLeft.accessories);
-          setWatchsMinted(tokensLeft.watchs);
+          setBagsBought(10000 - tokensLeft.bags);
+          setWatchsBought(10000 - tokensLeft.wines);
+          setAccessoriesBought(10000 - tokensLeft.accessories);
+          setWatchsBought(10000 - tokensLeft.watchs);
         })
         .catch((err) => {
           console.log(err);
@@ -192,7 +196,14 @@ function App() {
     };
     showTokensLeft();
   }, []);
-
+  console.log(
+    "bags bought",
+    bagsBought,
+    "watches bought",
+    watchesBought,
+    "accessories bought",
+    accessoriesBought
+  );
   return (
     <div>
       <div className="nav">
