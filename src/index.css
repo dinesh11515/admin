@@ -1,13 +1,61 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  margin:0;
+  font-family: 'Open Sans', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.nav{
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 2%;
+  background-color: #764AF1;
 }
+
+.nav > button {
+  background-color: #F2F2F2;
+  padding: 10px;
+  border: none;
+  border-radius: 7px;
+}
+
+.mint_page{
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.minting{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-bottom: solid 1px gray;
+  border-right: solid 1px gray;
+  
+}
+
+.minting > h1{
+  align-self: center;
+}
+
+.minting_count{
+  /* display: flex; */
+}
+
+
+.minting > input {
+  height: 25px;
+  border-radius: 5px;
+  width: 200px;
+}
+.minting > button {
+  background-color: #764AF1;
+  padding: 7px;
+  border: none;
+  width: 100px;
+  border-radius: 5px;
+  color: white;
+  margin-top: 10px;
+}
+
