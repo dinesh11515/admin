@@ -178,31 +178,34 @@ function App() {
       alert(err);
     }
   };
-
   React.useEffect(() => {
-    const showTokensLeft = async () => {
-      axios
-        .get(`http://localhost:5003/api/tokens/API/userCollection/tokensLeft/`)
-        .then((res) => {
-          const { tokensLeft } = res.data;
-          setBagsBought(10000 - tokensLeft.bags);
-          setWatchsBought(10000 - tokensLeft.wines);
-          setAccessoriesBought(10000 - tokensLeft.accessories);
-          setWatchsBought(10000 - tokensLeft.watchs);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    showTokensLeft();
-  }, []);
+    if (currAccount !== "") {
+      const showTokensLeft = async () => {
+        axios
+          .get(`http://localhost:3002/usercollection/tokensleft`)
+          .then((res) => {
+            const { tokensLeft } = res.data;
+            setBagsBought(tokensLeft.bag);
+            setWinesBought(tokensLeft.wine);
+            setAccessoriesBought(tokensLeft.accessories);
+            setWatchsBought(tokensLeft.watch);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+      showTokensLeft();
+    }
+  }, [currAccount]);
   console.log(
     "bags bought",
     bagsBought,
     "watches bought",
-    watchesBought,
+    watchsBought,
     "accessories bought",
-    accessoriesBought
+    accessoriesBought,
+    "wine bought",
+    winesBought
   );
   return (
     <div>
@@ -224,7 +227,14 @@ function App() {
           <button onClick={() => mint("all")}>mint</button>
           <div className="minting_count">
             <h2>Nfts minted: {totalMinted}</h2>
-            <h2>Nfts left : {totalAmount}</h2>
+            <h2>
+              Nfts left :{" "}
+              {totalAmount -
+                watchsBought -
+                bagsBought -
+                winesBought -
+                accessoriesBought}
+            </h2>
           </div>
         </div>
 
@@ -238,7 +248,7 @@ function App() {
           <button onClick={() => mint("watch")}>mint</button>
           <div className="minting_count">
             <h2>Watchs minted: {watchsMinted}</h2>
-            <h2>Watchs left : {totalWatch}</h2>
+            <h2>Watchs left : {totalWatch - watchsBought}</h2>
           </div>
         </div>
 
@@ -252,7 +262,7 @@ function App() {
           <button onClick={() => mint("bag")}>mint</button>
           <div className="minting_count">
             <h2>Bags left : {bagsMinted}</h2>
-            <h2>Bags left : {totalBag}</h2>
+            <h2>Bags left : {totalBag - bagsBought}</h2>
           </div>
         </div>
         <div className="minting">
@@ -265,7 +275,7 @@ function App() {
           <button onClick={() => mint("wine")}>mint</button>
           <div className="minting_count">
             <h2>Wines minted: {winesMinted}</h2>
-            <h2>Wines left: {totalWine}</h2>
+            <h2>Wines left: {totalWine - winesBought}</h2>
           </div>
         </div>
 
@@ -279,7 +289,7 @@ function App() {
           <button onClick={() => mint("accessories")}>mint</button>
           <div className="minting_count">
             <h2>Accessories minted: {accessoriesMinted}</h2>
-            <h2>Accessories left : {totalAccessories}</h2>
+            <h2>Accessories left : {totalAccessories - accessoriesBought}</h2>
           </div>
         </div>
 
